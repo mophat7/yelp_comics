@@ -10,11 +10,6 @@ const localStrategy = require("passport-local").Strategy;
 const expressSession = require("express-session");
 
 //===Config Imports=======
-try {
-  const config = require("./config");
-} catch (error) {
-  console.log(`error occured ${error}`);
-}
 
 const User = require("./models/user");
 //============================
@@ -31,6 +26,7 @@ mongoose.set("useUnifiedTopology", true);
 const comicRoutes = require("./routes/comics");
 const commentRoutes = require("./routes/comments");
 const mainRoutes = require("./routes/main");
+let config = require("./config");
 
 //============================
 //seed DB
@@ -63,7 +59,7 @@ try {
 //express sessions
 app.use(
   expressSession({
-    secret: "dfdfjdfj3TJFJFDfjfffIFJjfjffl",
+    secret: process.env.ES_SECRET || config.expressSession.secret,
     resave: false,
     saveUninitialized: false,
   })
