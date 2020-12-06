@@ -47,7 +47,6 @@ app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 
 try {
-  let config = require("./config");
   mongoose.connect(config.db.connection, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
