@@ -72,6 +72,13 @@ app.use("/comics", comicRoutes);
 app.use(commentRoutes);
 app.use(mainRoutes);
 
-app.listen(3000, () => {
+const stripAnsi = require("strip-ansi");
+
+stripAnsi("\u001B[4mUnicorn\u001B[0m");
+//=> 'Unicorn'
+
+stripAnsi("\u001B]8;;https://github.com\u0007Click\u001B]8;;\u0007");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
   console.log("Server is running on port 3000");
 });
