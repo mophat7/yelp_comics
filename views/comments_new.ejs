@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+<div class="container">
+  <div class="row">
+    <div class="col-6 m-auto">
+      <h1>
+        Add New Comment
+        <b class="text-capitalize text-primary"> <%= user.username %></b>
+      </h1>
+      <form action="/comics/<%=id%>/comments" method="POST">
+        <div class="form-group">
+          <textarea
+            name="text"
+            id="text"
+            cols="70"
+            rows="8"
+            required
+          ></textarea>
+        </div>
+        <input type="hidden" name="comicId" value="<%=id%>" />
+
+        <input type="submit" value="Submit" class="btn btn-primary btn-lg" />
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>

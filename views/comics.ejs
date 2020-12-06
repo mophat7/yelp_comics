@@ -1,0 +1,34 @@
+<%- include('partials/header.ejs') %>
+
+<div class="container">
+  <h1>Comics Page</h1>
+  <br />
+  <p>
+    Welcome <b class="text-success text-capitalize"><% if (user) { %>
+      <%= user.username %>
+    <% } %></b>
+  </p>
+  <hr />
+  <div class="row">
+    <!-- start of card -->
+    <% comics.forEach(comic=>{%>
+
+    <div class="col-xs-12 col-sm-4">
+      <div class="card">
+        <div class="card-header"><%= comic.title %></div>
+        <div class="card-body img-fluid">
+          <a href="/comics/<%= comic._id %> "
+            ><img src="<%= comic.image %> " alt="" class="img-fluid"
+          /></a>
+        </div>
+        <div class="card-footer"><%= comic.description %></div>
+      </div>
+    </div>
+
+    <% }) %>
+
+    <!-- end of card -->
+  </div>
+</div>
+
+<%- include('partials/footer.ejs') %>

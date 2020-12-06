@@ -1,0 +1,91 @@
+<%-include('partials/header') %>
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-6 show-image-container col-xs-12">
+      <img src="<%= comic.image %> " alt="" class="img-fluid" />
+    </div>
+
+    <div class="col-6 show-details-container col-xs-12">
+      <h1><%= comic.title %></h1>
+      <p><%= comic.description %></p>
+
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">Author</th>
+            <td><%= comic.author %></td>
+          </tr>
+          <tr>
+            <th scope="row">Publisher</th>
+            <td><%= comic.publisher %></td>
+          </tr>
+          <tr>
+            <th scope="row">Date</th>
+            <td><%= comic.date %></td>
+          </tr>
+          <tr>
+            <th scope="row">Series</th>
+            <td><%= comic.series %></td>
+          </tr>
+          <tr>
+            <th scope="row">Issue</th>
+            <td><%= comic.issue %></td>
+          </tr>
+          <tr>
+            <th scope="row">Genre</th>
+            <td><%= comic.genre %></td>
+          </tr>
+          <tr>
+            <th scope="row">Color</th>
+            <td><%= comic.color %></td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="/comics/<%= comic.id %>/edit ">
+        <button class="btn btn-outline-info btn-lg btn-block mb-2">Edit</button>
+      </a>
+
+      <form action="/comics/<%= comic._id %>?_method=DELETE" method="POST">
+        <button class="btn btn-outline-danger btn-lg btn-block mb-2">
+          Delete
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row show-comment-head mt-3 mb-3">
+    <a href="/comics/<%= comic._id %>/comments/new "
+      ><button class="btn btn-success btn-sm">Comment</button></a
+    >
+  </div>
+  <% comments.forEach(comment=>{%>
+  <div class="row show-comment-container py-2 border">
+    <div class="col-2 col-xs-12 border-right my-auto">
+      <b class="text-primary my-auto text-capitalize"
+        ><%=comment.user.username%>
+      </b>
+    </div>
+    <div
+      class="col-2 border-right my-auto d-flex flex-wrap justify-content-center"
+    >
+      <a
+        href="/comics/<%= comic._id %>/comments/<%= comment.id %>/edit "
+        class="btn btn-sm btn-success w-75 p-0 my-1"
+        >Edit</a
+      >
+      <form
+        action="/comics/<%= comic._id %>/comments/<%= comment._id %>?_method=DELETE "
+        class="w-75 my-1"
+        method="POST"
+      >
+        <button class="btn btn-sm btn-danger w-100 p-0">Delete</button>
+      </form>
+    </div>
+    <div class="col-8 col-xs-12 my-auto"><%=comment.text%></div>
+  </div>
+
+  <% }) %>
+  <div class="py-5"></div>
+</div>
+
+<%-include('partials/footer') %>

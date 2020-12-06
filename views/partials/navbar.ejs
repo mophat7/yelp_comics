@@ -1,0 +1,80 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/comics">Comics</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      
+
+      <% if (user) { %>
+        <li class="nav-item active">
+          <a class="nav-link" href="/comics">Comics</a>
+        </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Genres
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Superhero</a>
+          <a class="dropdown-item" href="#">Manga</a>
+          <a class="dropdown-item" href="#">Slice of Life</a>
+          <a class="dropdown-item" href="#">Sci-fi</a>
+          <a class="dropdown-item" href="#">Fantancy</a>
+          <a class="dropdown-item" href="#">Horro</a>
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Manga</a>
+          <a class="dropdown-item" href="#">Nonfiction</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/comics/new">Add Comic</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-danger" href="/logout">Log Out</a>
+      </li>
+      <form class="form-inline my-2 my-lg-0" action="/comics/search" method="GET">
+        <input
+          class="form-control mr-sm-2"
+          type="search"
+          name="term"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Search
+        </button>
+      </form>
+
+      <% } else{%>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/signup">Sign Up</a>
+      </li>
+
+      <% } %>
+    </ul>
+   
+  </div>
+</nav>

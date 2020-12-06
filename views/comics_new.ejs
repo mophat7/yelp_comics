@@ -1,0 +1,76 @@
+<%- include('partials/header') %>
+
+<div class="row">
+  <div class="col-6 m-auto">
+    <h1>Add New Comic</h1>
+
+    <form action="/comics" method="POST">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          name="title"
+          autofocus
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" name="description" class="form-control" required />
+      </div>
+
+      <div class="form-group">
+        <label for="author">Author</label>
+        <input type="text" name="author" class="form-control" required />
+      </div>
+
+      <div class="form-group">
+        <label for="publisher">Publisher</label>
+        <input type="text" name="publisher" class="form-control" required />
+      </div>
+
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input type="date" name="date" class="form-control" required />
+      </div>
+      <div class="form-group">
+        <label for="series">Series</label>
+        <input type="text" name="series" class="form-control" required />
+      </div>
+      <div class="form-group">
+        <label for="issue">Issue</label>
+        <input type="number" name="issue" class="form-control" required />
+      </div>
+      <div class="form-group">
+        <label for="genre">Genre</label>
+        <select name="genre" id="genre" class="form-control" required>
+          <option value="" selected disabled>~Choose Below~</option>
+          <option value="">Superhero</option>
+          <option value="">Manga</option>
+          <option value="">Slice-of-Life</option>
+          <option value="">Humor</option>
+          <option value="">Sci-fi</option>
+          <option value="">Fantancy</option>
+          <option value="">Horror</option>
+          <option value="">Action</option>
+          <option value="">Nonfiction</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="color">Color?</label>
+        <input type="checkbox" name="color" required />
+      </div>
+      <div class="form-group">
+        <label for="image">Image Link</label>
+        <input type="text" name="image" class="form-control" required />
+        <br /><br />
+      </div>
+      <button type="submit" class="form-control btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
