@@ -52,7 +52,12 @@ try {
     useCreateIndex: true,
   });
 } catch (error) {
-  console.log("connection error" + error);
+  console.log("connection error working locally not" + error);
+  mongoose.connect(process.env.DB_CONNECTION_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  });
 }
 
 //express sessions
