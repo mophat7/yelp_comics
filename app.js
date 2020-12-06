@@ -11,7 +11,7 @@ const expressSession = require("express-session");
 
 //===Config Imports=======
 try {
-  const config = require("./config");
+  var config = require("./config");
 } catch (error) {
   console.log(`error occured ${error}`);
 }
@@ -47,6 +47,7 @@ app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 
 try {
+  let config = require("./config");
   mongoose.connect(config.db.connection, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
