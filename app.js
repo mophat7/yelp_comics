@@ -10,7 +10,12 @@ const localStrategy = require("passport-local").Strategy;
 const expressSession = require("express-session");
 
 //===Config Imports=======
-const config = require("./config");
+try {
+  const config = require("./config");
+} catch (error) {
+  console.log(`error occured ${error}`);
+}
+
 const User = require("./models/user");
 //============================
 //SETTINGS
@@ -40,11 +45,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 
-mongoose.connect(config.db.connection, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-});
+try {
+  mongoose.connect(config.db.connection, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  });
+} catch (error) {
+  console.log("connection error" + error);
+}
 
 //express sessions
 app.use(
@@ -71,7 +80,6 @@ app.use((req, res, next) => {
 app.use("/comics", comicRoutes);
 app.use(commentRoutes);
 app.use(mainRoutes);
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
