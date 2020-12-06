@@ -55,7 +55,7 @@ route.put(
 
       .then((updatedComment) => {
         console.log(updatedComment);
-        res.redirect(`/comics/${req.params.id}`);
+        res.redireclect(`/comics/${req.params.id}`);
       })
       .catch((err) => {
         console.log(err);
