@@ -31,7 +31,6 @@ mongoose.set("useUnifiedTopology", true);
 const comicRoutes = require("./routes/comics");
 const commentRoutes = require("./routes/comments");
 const mainRoutes = require("./routes/main");
-let config = require("./config");
 
 //============================
 //seed DB
