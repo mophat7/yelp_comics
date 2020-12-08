@@ -8,6 +8,7 @@ const morgan = require("morgan");
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const expressSession = require("express-session");
+const flash = require("connect-flash");
 
 //===Config Imports=======
 try {
@@ -68,6 +69,8 @@ app.use(
     saveUninitialized: false,
   })
 );
+//flash
+app.use(flash());
 //passport config
 app.use(passport.initialize());
 app.use(passport.session());
