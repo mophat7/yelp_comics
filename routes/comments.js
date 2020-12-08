@@ -19,8 +19,8 @@ route.post(`/comics/:id/comments`, isLoggedIn, async (req, res) => {
     comicId: req.body.comicId,
   };
   const newComment = await Comment.create(comment);
+  req.flash("success", "Your Comment has been posted");
   try {
-    console.log(newComment);
     res.redirect(`/comics/${req.body.comicId}`);
   } catch (error) {
     console.log(error);
@@ -31,7 +31,7 @@ route.post(`/comics/:id/comments`, isLoggedIn, async (req, res) => {
 route.get(
   "/comics/:id/comments/:commentId/edit",
   isLoggedIn,
-  checkCommentOwner,
+
   async (req, res) => {
     try {
       const comic = await Comic.findById(req.params.id).exec();
@@ -45,37 +45,33 @@ route.get(
 
 route.put(
   "/comics/:id/comments/:commentid",
-  isLoggedIn,
-  checkCommentOwner,
-  (req, res) => {
-    Comment.findByIdAndUpdate(
-      req.params.commentid,
-      { text: req.body.text },
-      { new: true }
-    )
 
-      .then((updatedComment) => {
-        console.log(updatedComment);
-        res.redireclect(`/comics/${req.params.id}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  async (req, res) => {
+    try {
+      await Comment.findByIdAndUpdate(
+        req.params.commentid,
+        { text: req.body.text },
+        { new: true }
+      );
+      req.flash("success", "Updated Comment Successfully");
+      res.redirect(`/comics/${req.params.id}`);
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 route.delete(
   "/comics/:id/comments/:commentId",
-  isLoggedIn,
-  checkCommentOwner,
+
   async (req, res) => {
     try {
       const deletedComment = await Comment.findByIdAndDelete(
         req.params.commentId
       ).exec();
-      console.log(deletedComment);
+      req.flash("success", "Deleted comment successfully");
       res.redirect(`/comics/${req.params.id}`);
     } catch (error) {
-      console.log(error);
+      res.send(error);
     }
   }
 );

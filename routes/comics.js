@@ -7,7 +7,7 @@ const checkComicOwner = require("../utils/checkComicOwner");
 const isLoggedIn = require("../utils/isLoggedIn");
 
 router.get("/", async (req, res) => {
-  console.log(req.user);
+ 
   try {
     const comics = await Comic.find().exec();
     res.render("comics", { comics });
@@ -75,7 +75,7 @@ router.get("/genre/:genre", async (req, res) => {
   ];
   if (validGenres.includes(req.params.genre.toLowerCase())) {
     const comics = await Comic.find({ genre: req.params.genre }).exec();
-    console.log(comics);
+
     res.render("comics", { comics });
   } else {
     console.log("Enter Valid Genre " + req.params.genre);
@@ -119,7 +119,6 @@ router.put("/:id/", checkComicOwner, async (req, res) => {
     }).exec();
     req.flash("success", "You have successfully Updated Your Comic");
     res.redirect("/comics/" + req.params.id);
-    console.log(updatedComic);
   } catch (error) {
     console.log(error);
   }
@@ -129,7 +128,6 @@ router.delete("/:id/", checkComicOwner, async (req, res) => {
     const deletedComic = await Comic.findByIdAndDelete(req.params.id).exec();
     req.flash("success", "You have successfully Deleted Your  Comic");
     res.redirect("/comics");
-    console.log(deletedComic);
   } catch (error) {
     console.log(error);
   }
