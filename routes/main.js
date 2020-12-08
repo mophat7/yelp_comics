@@ -18,11 +18,13 @@ router.post("/signup", async (req, res) => {
     const newUser = await User.register(
       new User({
         email: req.body.email,
-        username: req.body.password,
+        username: req.body.username,
       }),
       req.body.password
     );
-    console.log(newUser);
+
+    req.flash(`success`, `Signed you up as ${newUser.username}`);
+
     passport.authenticate("local")(req, res, () => {
       res.redirect("/comics");
     });
@@ -38,13 +40,16 @@ router.post(
   "/login",
   passport.authenticate("local", {
     successRedirect: "/comics",
-   
+
     failureRedirect: "/login",
+    failureFlash: true,
+    successFlash: "Logged in Successfully",
   })
 );
 
 router.get("/logout", (req, res) => {
   req.logOut();
+  req.flash("success", "Logged out Successfully");
   res.redirect("/login");
 });
 

@@ -37,8 +37,8 @@ router.post("/", async (req, res) => {
   };
 
   const comic = await Comic.create(newComic);
+  req.flash("success", "You have successfully created a new Comic");
   try {
-    console.log(comic);
     res.redirect("/comics/" + comic._id);
   } catch (error) {
     console.log(error);
@@ -54,6 +54,7 @@ router.get("/search", async (req, res) => {
         $search: req.query.term,
       },
     });
+    req.flash("success", "Here are the results");
     res.render("comics", { comics });
   } catch (error) {
     console.log(error);
@@ -116,6 +117,7 @@ router.put("/:id/", checkComicOwner, async (req, res) => {
     const updatedComic = await Comic.findByIdAndUpdate(req.params.id, comic, {
       new: true,
     }).exec();
+    req.flash("success", "You have successfully Updated Your Comic");
     res.redirect("/comics/" + req.params.id);
     console.log(updatedComic);
   } catch (error) {
@@ -125,6 +127,7 @@ router.put("/:id/", checkComicOwner, async (req, res) => {
 router.delete("/:id/", checkComicOwner, async (req, res) => {
   try {
     const deletedComic = await Comic.findByIdAndDelete(req.params.id).exec();
+    req.flash("success", "You have successfully Deleted Your  Comic");
     res.redirect("/comics");
     console.log(deletedComic);
   } catch (error) {
