@@ -58,6 +58,27 @@ router.get("/search", async (req, res) => {
     console.log(error);
   }
 });
+//Genre
+router.get("/genre/:genre", async (req, res) => {
+  const validGenres = [
+    "superhero",
+    "manga",
+    "slice-of-life",
+    "humor",
+    "sci-fi",
+    "fantasy",
+    "horror",
+    "action",
+    "nonfiction",
+  ];
+  if (validGenres.includes(req.params.genre.toLowerCase())) {
+    const comics = await Comic.find({ genre: req.params.genre }).exec();
+    console.log(comics);
+    res.render("comics", { comics });
+  } else {
+    console.log("Enter Valid Genre " + req.params.genre);
+  }
+});
 router.get("/:id", isLogggedIn, async (req, res) => {
   try {
     const comic = await Comic.findById(req.params.id).exec();
