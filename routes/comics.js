@@ -5,7 +5,7 @@ const Comic = require("../models/comic");
 const Comment = require("../models/comment");
 const checkComicOwner = require("../utils/checkComicOwner");
 
-router.get("/", isLogggedIn, async (req, res) => {
+router.get("/", async (req, res) => {
   console.log(req.user);
   try {
     const comics = await Comic.find().exec();
@@ -43,7 +43,7 @@ router.post("/", isLogggedIn, async (req, res) => {
     console.log(error);
   }
 });
-router.get("/new", isLogggedIn, (req, res) => {
+router.get("/new", (req, res) => {
   res.render("comics_new");
 });
 router.get("/search", async (req, res) => {
