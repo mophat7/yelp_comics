@@ -14,12 +14,10 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      
-
       <% if (user) { %>
-        <li class="nav-item active">
-          <a class="nav-link" href="/comics">Comics</a>
-        </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/comics">Comics</a>
+      </li>
       <li class="nav-item dropdown">
         <a
           class="nav-link dropdown-toggle"
@@ -48,9 +46,16 @@
         <a class="nav-link" href="/comics/new">Add Comic</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-danger" href="/logout">Log Out</a>
+        <a class="nav-link text-danger" href="/logout"
+          >Log Out
+          <b class="text-primary text-capitalize"><%= user.username %></b>
+        </a>
       </li>
-      <form class="form-inline my-2 my-lg-0" action="/comics/search" method="GET">
+      <form
+        class="form-inline my-2 my-lg-0"
+        action="/comics/search"
+        method="GET"
+      >
         <input
           class="form-control mr-sm-2"
           type="search"
@@ -75,6 +80,5 @@
 
       <% } %>
     </ul>
-   
   </div>
 </nav>
