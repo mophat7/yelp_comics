@@ -3,12 +3,13 @@ const route = express.Router();
 const Comment = require("../models/comment");
 const Comic = require("../models/comic");
 const checkCommentOwner = require("../utils/checkCommentsOwner");
+const isLoggedIn = require("../utils/isLoggedIn");
 
 route.get("/comics/:id/comments/new", (req, res) => {
   res.render("comments_new", { id: req.params.id });
 });
 
-route.post(`/comics/:id/comments`, isLogggedIn, async (req, res) => {
+route.post(`/comics/:id/comments`, isLoggedIn, async (req, res) => {
   const comment = {
     user: {
       id: req.user._id,
@@ -29,7 +30,7 @@ route.post(`/comics/:id/comments`, isLogggedIn, async (req, res) => {
 
 route.get(
   "/comics/:id/comments/:commentId/edit",
-  isLogggedIn,
+  isLoggedIn,
   checkCommentOwner,
   async (req, res) => {
     try {
@@ -44,7 +45,7 @@ route.get(
 
 route.put(
   "/comics/:id/comments/:commentid",
-  isLogggedIn,
+  isLoggedIn,
   checkCommentOwner,
   (req, res) => {
     Comment.findByIdAndUpdate(
@@ -64,7 +65,7 @@ route.put(
 );
 route.delete(
   "/comics/:id/comments/:commentId",
-  isLogggedIn,
+  isLoggedIn,
   checkCommentOwner,
   async (req, res) => {
     try {
@@ -79,11 +80,5 @@ route.delete(
   }
 );
 
-function isLogggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    res.redirect("/login");
-  }
-}
+
 module.exports = route;

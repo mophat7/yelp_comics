@@ -4,6 +4,7 @@ const router = express.Router();
 const Comic = require("../models/comic");
 const Comment = require("../models/comment");
 const checkComicOwner = require("../utils/checkComicOwner");
+const isLoggedIn = require("../utils/isLoggedIn");
 
 router.get("/", async (req, res) => {
   console.log(req.user);
@@ -14,7 +15,7 @@ router.get("/", async (req, res) => {
     console.log(error);
   }
 });
-router.post("/", isLogggedIn, async (req, res) => {
+router.post("/", async (req, res) => {
   //make schema
   const genre = req.body.genre.toLowerCase();
   const newComic = {
@@ -43,7 +44,7 @@ router.post("/", isLogggedIn, async (req, res) => {
     console.log(error);
   }
 });
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("comics_new");
 });
 router.get("/search", async (req, res) => {
@@ -79,7 +80,7 @@ router.get("/genre/:genre", async (req, res) => {
     console.log("Enter Valid Genre " + req.params.genre);
   }
 });
-router.get("/:id", isLogggedIn, async (req, res) => {
+router.get("/:id", isLoggedIn, async (req, res) => {
   try {
     const comic = await Comic.findById(req.params.id).exec();
     const comments = await Comment.find({ comicId: req.params.id });
@@ -130,12 +131,5 @@ router.delete("/:id/", checkComicOwner, async (req, res) => {
     console.log(error);
   }
 });
-function isLogggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    res.redirect("/login");
-  }
-}
 
 module.exports = router;

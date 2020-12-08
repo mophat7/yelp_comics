@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const passport = require("passport");
+// const isLoggedIn = require("../utils/isLoggedIn");
 
 router.get("/", (req, res) => {
   res.render("landing");
@@ -37,6 +38,7 @@ router.post(
   "/login",
   passport.authenticate("local", {
     successRedirect: "/comics",
+   
     failureRedirect: "/login",
   })
 );
