@@ -4,16 +4,17 @@
   <h1>Comics Page</h1>
   <br />
   <p>
-    Welcome <b class="text-success text-capitalize"><% if (user) { %>
-      <%= user.username %>
-    <% } %></b>
+    Welcome
+    <b class="text-success text-capitalize"
+      ><% if (user) { %> <%= user.username %> <% } %></b
+    >
   </p>
   <hr />
   <div class="row">
     <!-- start of card -->
     <% comics.forEach(comic=>{%>
 
-    <div class="col-xs-12 col-sm-4">
+    <div class="col-12 col-lg-4">
       <div class="card">
         <div class="card-header"><%= comic.title %></div>
         <div class="card-body img-fluid">
