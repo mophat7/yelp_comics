@@ -1,18 +1,17 @@
 <%- include('partials/header') %>
 <div class="container">
   <div class="row">
-    <div class="col-6 m-auto">
-      <h1>
+    <div class="col-lg-6 col-12 col-md-12 m-auto">
+      <p>
         Add New Comment
         <b class="text-capitalize text-primary"> <%= user.username %></b>
-      </h1>
+      </p>
       <form action="/comics/<%=id%>/comments" method="POST">
         <div class="form-group">
           <textarea
             name="text"
             id="text"
-            cols="70"
-            rows="8"
+            class="form-control"
             required
           ></textarea>
         </div>
