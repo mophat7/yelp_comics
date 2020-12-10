@@ -16,13 +16,12 @@
 
     <div class="col-12 col-lg-4">
       <div class="card">
-        <div class="card-header"><%= comic.title %></div>
+        <div class="card-header text-bold text-center"><%= comic.title %></div>
         <div class="card-body img-fluid">
           <a href="/comics/<%= comic._id %> "
             ><img src="<%= comic.image %> " alt="" class="img-fluid"
           /></a>
         </div>
-        <div class="card-footer"><%= comic.description %></div>
       </div>
     </div>
 

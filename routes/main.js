@@ -5,7 +5,7 @@ const passport = require("passport");
 // const isLoggedIn = require("../utils/isLoggedIn");
 
 router.get("/", (req, res) => {
-  res.render("landing");
+  res.render("signup");
 });
 
 //signup New
