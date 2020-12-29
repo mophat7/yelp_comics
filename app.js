@@ -9,7 +9,7 @@ const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const expressSession = require("express-session");
 const flash = require("connect-flash");
-process.unhandledRejections = 'strict';
+process.unhandledRejections = "strict";
 //===Config Imports=======
 try {
   var config = require("./config");
